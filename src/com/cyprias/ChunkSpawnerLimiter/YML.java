@@ -12,7 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class YML extends YamlConfiguration {
 	private static File file = null;
-	public YML(InputStream fileStream) throws IOException, InvalidConfigurationException {
+	public YML(File fileStream) throws IOException, InvalidConfigurationException {
 		//load yml from resources. 
 		load(fileStream);
 	}

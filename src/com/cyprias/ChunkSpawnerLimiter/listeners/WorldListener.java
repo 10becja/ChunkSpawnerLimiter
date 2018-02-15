@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -99,13 +98,15 @@ public class WorldListener implements Listener {
 			if (Config.contains("entities." + eType)) {
 				if (!types.containsKey(eType))
 					types.put(eType, new ArrayList<Entity>());
-				types.get(eType).add(ents[i]);
+				if(ents[i].getCustomName() == null)
+					types.get(eType).add(ents[i]);
 			}
 
 			if (Config.contains("entities." + eGroup)) {
 				if (!types.containsKey(eGroup))
 					types.put(eGroup, new ArrayList<Entity>());
-				types.get(eGroup).add(ents[i]);
+				if(ents[i].getCustomName() == null)
+					types.get(eGroup).add(ents[i]);
 			}
 		}
 

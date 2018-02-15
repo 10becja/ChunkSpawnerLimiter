@@ -1,9 +1,6 @@
 package com.cyprias.ChunkSpawnerLimiter;
 
-import java.io.IOException;
 import java.util.List;
-
-import org.bukkit.configuration.InvalidConfigurationException;
 
 public class Config {
 	public static boolean getBoolean(String property) {
@@ -29,15 +26,5 @@ public class Config {
 	
 	public static  List<String> getStringList(String property) {
 		return Plugin.getInstance().getConfig().getStringList(property);
-	}
-	
-	public static void checkForMissingProperties() throws IOException, InvalidConfigurationException {
-		YML diskConfig = new YML(Plugin.getInstance().getDataFolder(), "config.yml");
-		YML defaultConfig = new YML(Plugin.getInstance().getResource("config.yml"));
-
-		for (String property : defaultConfig.getKeys(true)) {
-			if (!diskConfig.contains(property))
-				Logger.warning(Plugin.chatPrefix + property + " is missing from your config.yml, using default.");
-		}
 	}
 }

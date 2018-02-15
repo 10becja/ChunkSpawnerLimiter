@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import org.bukkit.Location;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
 
 import com.cyprias.ChunkSpawnerLimiter.listeners.EntityListener;
 import com.cyprias.ChunkSpawnerLimiter.listeners.WorldListener;
@@ -37,29 +35,9 @@ public class Plugin extends JavaPlugin {
 			}
 		}
 
-		// Check if the config on disk is missing any settings, tell console if
-		// so.
-		try {
-			Config.checkForMissingProperties();
-		} catch (IOException e4) {
-			e4.printStackTrace();
-		} catch (InvalidConfigurationException e4) {
-			e4.printStackTrace();
-		}
-
 		// Register our event listener.
 		getServer().getPluginManager().registerEvents(new EntityListener(), this);
 		getServer().getPluginManager().registerEvents(new WorldListener(), this);
-		
-		// Start the Metrics.
-		if (Config.getBoolean("properties.use-metrics"))
-			try {
-				Metrics metrics = new Metrics(this);
-				metrics.start();
-			} catch (IOException e) {
-			}
-		
-
 	}
 
 	public void onDisable() {
